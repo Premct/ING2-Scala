@@ -7,10 +7,10 @@ lazy val root = (project in file("."))
     name := "td1"
   )
 
-organization  := "fr.cyu.cytech"
+organization  := "tdUn"
 name          := "console"
 version       := "1.0"
-scalaVersion  := "2.13.7"
+scalaVersion  := "2.13.8"
 
 //Options de compilation
 scalacOptions ++= Seq("-deprecation", "-feature")
