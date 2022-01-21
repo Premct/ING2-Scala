@@ -1,5 +1,6 @@
 package rational
 
+import scala.annotation.tailrec
 import scala.math.Ordered;
 
 /**
@@ -7,25 +8,19 @@ import scala.math.Ordered;
  *
  * @param numerator   The numerator
  * @param denominator The denominator
+ * @note Rational(val numerator: Int, val denominator: Int = 1) allows building the two asked constructors
  */
-class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rational] {
-  /**
-   * Gives the opposite of a Rational
-   *
-   * @return A Rational, as the opposite of a Rational
-   */
-  def unary_- : Rational = {
-    Rational(numerator * (-1), denominator)
-  }
+class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
 
-  /**
-   * Invert a Rational
-   *
-   * @return A Rational, as an inverted Rational
-   */
-  def inverse: Rational = {
-    Rational(denominator, numerator)
-  }
+  /* import statics */
+  import Rational._
+
+  private val d = gcd(numerator, denominator)
+  val num: Int = numerator / d
+  val den: Int = denominator / d
+
+  lazy val unary_- : Rational = Rational(-num, den)
+  lazy val inverse: Rational = Rational(den, num)
 
   /**
    * Adds two Rationals
@@ -34,7 +29,7 @@ class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rationa
    * @return A Rational, as the sum of two Rationals
    */
   def +(other: Rational): Rational = {
-    Rational((numerator * other.denominator) + (other.numerator * denominator), denominator * other.denominator)
+    Rational((num * other.den) + (other.num * den), den * other.den)
   }
 
   /**
@@ -54,7 +49,7 @@ class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rationa
    * @return A Rational, as the multiplication of two Rationals
    */
   def *(other: Rational): Rational = {
-    Rational(numerator * other.numerator, denominator * other.denominator)
+    Rational(num * other.num, den * other.den)
   }
 
   /**
@@ -74,7 +69,7 @@ class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rationa
    * @return True if the two Rationals are equals, false otherwise
    */
   def ==(other: Rational): Boolean = {
-    (numerator == other.numerator) && (denominator == other.denominator)
+    compare(other) == 0
   }
 
   /**
@@ -84,7 +79,7 @@ class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rationa
    * @return An Int, as the subtract of numerators multiplied by each other denominators
    */
   override def compare(that: Rational): Int = {
-    (numerator * that.denominator) - (that.numerator * denominator)
+    (num * that.den) - (that.num * den)
   }
 
   /**
@@ -133,7 +128,7 @@ class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rationa
    * @return A string
    */
   override def toString: String = {
-    s"[RATIONAL]: $numerator/$denominator"
+    s"[RATIONAL]: $num" + (if(den == 1) "" else s"/$den")
   }
 }
 
@@ -158,8 +153,11 @@ object Rational {
    */
   def apply(numerator: Int): Rational = new Rational(numerator, 1);
 
+  @tailrec
+  private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
   /** Zero constant: result of 0/1 */
-  val zero: Rational = Rational(0, 1)
+  val zero: Rational = Rational(0)
 
   /** One constant: result of 1/1 */
   val one: Rational = Rational(1, 1)

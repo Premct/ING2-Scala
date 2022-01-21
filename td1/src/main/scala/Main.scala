@@ -1,3 +1,8 @@
+/**
+ * TD - Scala
+ * @author Pierre Monchecourt [monchecour@cy-tech.fr]
+ */
+
 import calendar.Calendar
 import rational.Rational
 
@@ -36,7 +41,7 @@ object Main {
     val minusR = -r
     val invertedR = r.inverse
 
-    val other = Rational(5, 7)
+    val other = Rational(6, 10)
 
     println(s"R: ${r.toString}")
     println(s"-R: ${minusR.toString}");
