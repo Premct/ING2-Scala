@@ -83,46 +83,6 @@ class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
   }
 
   /**
-   * Checks if a Rational (instantiated) is less greater than another Rational (as parameter)
-   *
-   * @param that A Rational
-   * @return True if a Rational (instantiated) is less greater than another Rational (as parameter), false otherwise
-   */
-  override def <(that: Rational): Boolean = {
-    compare(that) < 0
-  }
-
-  /**
-   * Checks if a Rational (instantiated) is greater than another Rational (as parameter)
-   *
-   * @param that A Rational
-   * @return True if a Rational (instantiated) is greater than another Rational (as parameter), false otherwise
-   */
-  override def >(that: Rational): Boolean = {
-    compare(that) > 0
-  }
-
-  /**
-   * Checks if a Rational (instantiated) is less greater or equal than another Rational (as parameter)
-   *
-   * @param that A Rational
-   * @return True if a Rational (instantiated) is less greater or equal than another Rational (as parameter), false otherwise
-   */
-  override def <=(that: Rational): Boolean = {
-    !(>(that))
-  }
-
-  /**
-   * Checks if a Rational (instantiated) is greater or equal than another Rational (as parameter)
-   *
-   * @param that A Rational
-   * @return True if a Rational (instantiated) is greater or equal than another Rational (as parameter), false otherwise
-   */
-  override def >=(that: Rational): Boolean = {
-    !(<(that))
-  }
-
-  /**
    * Format output to display a Rational
    *
    * @return A string
