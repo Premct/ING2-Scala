@@ -6,6 +6,7 @@
 
 import calendar.Calendar
 import rational.Rational
+import pi.Pi
 
 /**
  * Main object, as an object meant for testing Calendar and Rational
@@ -58,5 +59,15 @@ object Main {
     println(s"R > Other -> ${r > other}")
     println(s"R <= Other -> ${r <= other}")
     println(s"R >= Other -> ${r >= other}")
+
+    /*
+     * PI
+     */
+    println(s"------------")
+    println(s"-----PI-----")
+    println(s"------------")
+
+    println(s"Pi Approximation, first method: ${Pi.pi(1000000)}")
+    println(s"Pi Approximation, Monte-Carlo method: ${Pi.piMC(1000000)}")
   }
 }
