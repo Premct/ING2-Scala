@@ -7,8 +7,8 @@ lazy val root = (project in file("."))
     name := "td1"
   )
 
-organization  := "tdUn"
-name          := "console"
+organization  := "cytech"
+name          := "TdUn"
 version       := "1.0"
 scalaVersion  := "2.13.8"
 
