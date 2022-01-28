@@ -1,6 +1,7 @@
 package rational
 
 import scala.annotation.tailrec
+import scala.language.implicitConversions
 import scala.math.Ordered;
 
 /**
@@ -116,6 +117,8 @@ object Rational {
 
   @tailrec
   private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
+  implicit def int2Rational(n : Int): Rational = apply(n, 1)
 
   /** Zero constant: result of 0/1 */
   val zero: Rational = apply(0)
