@@ -13,6 +13,7 @@ import scala.math.Ordered;
 class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
 
   /* import statics */
+
   import Rational._
 
   private val d = gcd(numerator, denominator)
@@ -69,7 +70,7 @@ class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
    * @return True if the two Rationals are equals, false otherwise
    */
   def ==(other: Rational): Boolean = {
-    compare(other) == 0
+    (this compare other) == 0
   }
 
   /**
@@ -79,7 +80,7 @@ class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
    * @return An Int, as the subtract of numerators multiplied by each other denominators
    */
   override def compare(that: Rational): Int = {
-    (num * that.den) - (that.num * den)
+    (num * that.den) - (that.num * den) * den * that.den
   }
 
   /**
@@ -88,7 +89,7 @@ class Rational(numerator: Int, denominator: Int) extends Ordered[Rational] {
    * @return A string
    */
   override def toString: String = {
-    s"[RATIONAL]: $num" + (if(den == 1) "" else s"/$den")
+    s"[RATIONAL]: $num" + (if (den == 1) "" else s"/$den")
   }
 }
 
@@ -117,11 +118,11 @@ object Rational {
   private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
   /** Zero constant: result of 0/1 */
-  val zero: Rational = Rational(0)
+  val zero: Rational = apply(0)
 
   /** One constant: result of 1/1 */
-  val one: Rational = Rational(1, 1)
+  val one: Rational = apply(1, 1)
 
   /** Inf constant: result of 1/0 (impossible) */
-  val inf: Rational = Rational(1, 0)
+  val inf: Rational = apply(1, 0)
 }
