@@ -1,0 +1,5 @@
+package dichotomy
+
+object Dichotomy {
+
+}
